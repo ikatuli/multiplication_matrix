@@ -65,4 +65,8 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
-./multiplication_matrix
+multiplication_matrix
+*.backup
+C.txt
+A.txt
+B.txt
