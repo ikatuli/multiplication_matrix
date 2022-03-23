@@ -1,11 +1,13 @@
 import random
 import numpy
 
+maximum=30
+
 random.seed();
 
-m=random.randint(1, 30)
-n=random.randint(1, 30)
-a=numpy.array([[random.randint(1, 30)for i in range(n)] for i in range(m)])
+m=random.randint(1, maximum)
+n=random.randint(1, maximum)
+a=numpy.array([[random.randint(1, maximum)for i in range(n)] for i in range(m)])
 
 file = open("A.txt", "w+")
 file.write(str(m)+" "+str(n)+'\n')
@@ -15,8 +17,8 @@ for i in a:
         file.write(" ")
     file.write("\n")
 
-m=random.randint(1, 30)
-b=numpy.array([[random.randint(1, 30)for i in range(m)] for i in range(n)])
+m=random.randint(1, maximum)
+b=numpy.array([[random.randint(1, maximum)for i in range(m)] for i in range(n)])
 
 file = open("B.txt", "w+")
 file.write(str(n)+" "+str(m)+'\n')
