@@ -24,13 +24,13 @@ void grid_init(GridInfo *grid)
     int coordinates[2];
     int free_coords[2];
 
-    /*Получаем информцию преред наложением cart_grid */
+    /*Получаем информацию перед наложением  cart_grid */
     MPI_Comm_size(MPI_COMM_WORLD, &(grid->n_proc)); //Сохраняем количество процессов
     MPI_Comm_rank(MPI_COMM_WORLD, &old_rank); // Номер процесса
 
     grid->grid_dim = (int)sqrt(grid->n_proc); // корень от количества процессов
 											  //
-    if (grid->grid_dim * grid->grid_dim != grid->n_proc) { // Вызват ошибку, если обратно не получается количество процессов.
+    if (grid->grid_dim * grid->grid_dim != grid->n_proc) { //  Вызывает ошибку, если обратно не получается количество процессов.
         std::cout << "Количество процессов должно быть таково, что бы его корень был целым числом \n";
         exit(-1);
     }
@@ -44,12 +44,12 @@ void grid_init(GridInfo *grid)
     grid->my_row = coordinates[0];
     grid->my_col = coordinates[1];
 
-    /* Камуникаторы для строк */
+    /* Коммуникаторы для строк */
     free_coords[0] = 0;
     free_coords[1] = 1;
     MPI_Cart_sub(grid->grid_comm, free_coords, &(grid->row_comm));
 
-    /* Камуникаторы для столбцов */
+    /* Коммуникаторы для столбцов */
     free_coords[0] = 1;
     free_coords[1] = 0;
     MPI_Cart_sub(grid->grid_comm, free_coords, &(grid->col_comm));
@@ -189,7 +189,7 @@ int main(int argc, char* argv[])
 
 		// Находи наибольшую сторону.
 
-		//Не хочу линковать algorithm. Напишу замену max
+		//Не хочу ликовать algorithm. Напишу замену max
 		if (n>m)
 		{
 			if (n>k) {matrix_size=n;}
@@ -211,7 +211,7 @@ int main(int argc, char* argv[])
 			MPI_Send(&matrix_size,1,MPI_INT, thread, 0, MPI_COMM_WORLD);
 		}
 
-		//Преваращаем матрицы в квадраты
+		//Превращаем матрицы в квадраты
 		
 		pA  = (int *)malloc(matrix_size * matrix_size * sizeof(int));
 		square(A,pA,m,n,matrix_size);
@@ -276,7 +276,7 @@ int main(int argc, char* argv[])
         end_time = MPI_Wtime() - start_time;
     }
 
-	// Собираем куски матрицы по всем процесорам
+	// Собираем куски матрицы по всем процессам
 	
 	MPI_Gatherv(local_pC, local_matrix_size*local_matrix_size, MPI_INT, pC, sendcounts, displs, type, 0, MPI_COMM_WORLD);
 
